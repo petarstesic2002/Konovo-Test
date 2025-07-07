@@ -29,10 +29,9 @@ class Product extends Base
         }
         return ApiResponse::sendResponse("success", 200, $collection);
     }
-    public function show(Request $request) : JsonResponse
+    public function show(Request $request, $id) : JsonResponse
     {
         $token = $request->input("jwt_token");
-        $id = $request["id"];
         $product = $this->productRepository->find($token, $id);
         if(!$product)
         {

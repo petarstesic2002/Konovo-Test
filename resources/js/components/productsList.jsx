@@ -14,19 +14,22 @@ function ProductList() {
             if (category) params.category = category;
 
             const res = await api.get('/products', { params });
-            setProducts(res.data);
+            setProducts(res.data.data);
         };
         fetchProducts();
     }, [search, category]);
 
     return (
         <>
-            <input placeholder="Pretraga..." onChange={e => setSearch(e.target.value)} />
-            <input placeholder="Filter po kategoriji..." onChange={e => setCategory(e.target.value)} />
+            <input placeholder="Search..." onChange={e => setSearch(e.target.value)} />
+            <input placeholder="Filter by category..." onChange={e => setCategory(e.target.value)} />
             <ul>
                 {products.map(p => (
-                    <li key={p.id}>
-                        <Link to={`/products/${p.id}`}>{p.name} - {p.price.toFixed(2)}</Link>
+                    <li key={p.sifProduct}>
+                        <Link to={`/products/${p.sifProduct}`}>
+                            <img src={p.imgSrc} alt={p.name}/>
+                            {p.name} - {Number(p.price).toFixed(2)} RSD
+                        </Link>
                     </li>
                 ))}
             </ul>

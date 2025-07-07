@@ -29,7 +29,7 @@ class ProductRepository implements ProductRepositoryInterface
         $products = collect($response->json());
         $products = $products->map(function($product)
         {
-            if(isset($product["category"]) && strtolower($product["category"]) === "monitori"){
+            if(isset($product["categoryName"]) && strtolower($product["categoryName"]) === "monitori"){
                 if(isset($product["price"]) && is_numeric($product["price"])){
                     $product["price"] = round($product["price"] * 1.1, 2);
                 }
@@ -40,12 +40,12 @@ class ProductRepository implements ProductRepositoryInterface
             return $product;
         });
         if(!empty($filters["category"])){
-            $products = $products->where("category", $filters["category"]);
+            $products = $products->where("categoryName", $filters["category"]);
         }
         if(!empty($filters["search"])){
             $keyword = strtolower($filters["search"]);
             $products = $products->filter(function($product) use ($keyword){
-                return isset($product["name"]) && \Illuminate\Support\Str::contains(strtolower($product["name"]), $keyword);
+                return isset($product["naziv"]) && \Illuminate\Support\Str::contains(strtolower($product["naziv"]), $keyword);
             });
         }
         return $products;
