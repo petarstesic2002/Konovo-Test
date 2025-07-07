@@ -12,7 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias(
+            [
+                'attach.jwt'=>\App\Http\Middleware\AttachJwtMiddleware::class
+            ]
+        );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function productDetails() {
+function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const navigate = useNavigate();
@@ -25,4 +25,4 @@ function productDetails() {
     );
 }
 
-export default productDetails;
+export default ProductDetails;

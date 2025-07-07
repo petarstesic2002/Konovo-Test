@@ -6,6 +6,8 @@ use App\ApiResponse;
 use App\Http\Resources\ProductResource;
 use App\ProductRepository;
 use App\ProductRepositoryInterface;
+use Illuminate\Http\Client\HttpClientException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class Product extends Base
@@ -15,16 +17,23 @@ class Product extends Base
     {
         $this->productRepository = $productRepository;
     }
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse
     {
-        $filters = $request->only(["category", "search"]);
-        $products = $this->productRepository->getAll($filters);
-        $collection = ProductResource::collection($products);
+        $token = $request->input("jwt_token");
+        try {
+            $filters = $request->only(["category", "search"]);
+            $products = $this->productRepository->getAll($token, $filters);
+            $collection = ProductResource::collection($products);
+        }catch(HttpClientException){
+            return ApiResponse::sendResponse("Bad Request", 401);
+        }
         return ApiResponse::sendResponse("success", 200, $collection);
     }
-    public function show(int $id)
+    public function show(Request $request) : JsonResponse
     {
-        $product = $this->productRepository->find($id);
+        $token = $request->input("jwt_token");
+        $id = $request["id"];
+        $product = $this->productRepository->find($token, $id);
         if(!$product)
         {
             return ApiResponse::sendResponse("Product not found", 404);

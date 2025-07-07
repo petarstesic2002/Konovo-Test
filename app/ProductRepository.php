@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Support\Facades\Http;
 use Psy\Util\Str;
@@ -15,9 +16,12 @@ class ProductRepository implements ProductRepositoryInterface
         //
     }
 
-    public function getAll(array $filters = [])
+    /**
+     * @throws HttpClientException
+     * @throws ConnectionException
+     */
+    public function getAll(string $token, array $filters = [])
     {
-        $token = session("jwt_token");
         $response = Http::withToken($token)->get($this->apiUrl . "/products");
         if($response->failed()){
             throw new HttpClientException("Error", 401, null);
@@ -46,9 +50,9 @@ class ProductRepository implements ProductRepositoryInterface
         }
         return $products;
     }
-    public function find(int $id) : ?object
+    public function find(string $token, int $id) : ?object
     {
-        $products = $this->getAll();
+        $products = $this->getAll($token);
         $product = $products->firstWhere('id', $id);
         if(!$product){
             throw new NotFoundHttpException("Product Not Found", null, 404);

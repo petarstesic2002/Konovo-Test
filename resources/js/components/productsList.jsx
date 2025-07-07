@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import { Link } from 'react-router-dom';
 
-function productList() {
+function ProductList() {
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState('');
     const [category, setCategory] = useState('');
@@ -34,4 +34,4 @@ function productList() {
     );
 }
 
-export default productList;
+export default ProductList;

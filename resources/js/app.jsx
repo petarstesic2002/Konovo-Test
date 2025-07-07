@@ -1,30 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import Products from './pages/Products';
-import ProductDetails from './components/ProductDetails';
-import ProtectedRoute from './components/ProtectedRoute';
+import React from "react";
+import ReactDOM from 'react-dom/client';
+import App from "./components/app";
 
-function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/products" element={
-                    <ProtectedRoute>
-                        <Products />
-                    </ProtectedRoute>
-                } />
-                <Route path="/products/:id" element={
-                    <ProtectedRoute>
-                        <ProductDetails />
-                    </ProtectedRoute>
-                } />
-            </Routes>
-        </Router>
-    );
-}
+const root = ReactDOM.createRoot(document.getElementById('app'));
 
-export default App;
-
-ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+root.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+)
