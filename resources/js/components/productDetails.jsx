@@ -36,7 +36,7 @@ function ProductDetails() {
                     <p>Brend: {product.brand}</p>
                     <p>Cena: {product.price.toFixed(2)}</p>
                     <div>
-                        <strong>Description</strong>
+                        <strong>Opis</strong>
                         <div dangerouslySetInnerHTML={{ __html: product.description }} />
                     </div>
                 </div>
