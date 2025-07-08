@@ -7,20 +7,33 @@ function ProductDetails() {
     const [product, setProduct] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        api.get(`/products/${id}`)
-            .then(res => setProduct(res.data))
-            .catch(() => navigate('/products'));
-    }, [id]);
+    useEffect(()=>{
+        const fetchProduct = async () => {
+            try {
+                const res = await api.get(`/products/${id}`);
+                console.log(res.data.data);
+                setProduct(res.data.data);
 
-    if (!product) return <p>Učitavanje...</p>;
+            } catch(error){
+                navigate('/products');
+            }
+        }
+        fetchProduct();
+    }, [id, navigate]);
+
+    if (!product) return <p>Loading...</p>;
 
     return (
         <div>
+            <img src={product.imgSrc} alt={product.name} />
             <h2>{product.name}</h2>
-            <p>Kategorija: {product.category}</p>
-            <p>Cena: {product.price.toFixed(2)}</p>
-            <p>Opis: {product.description}</p>
+            <p>Category: {product.category}</p>
+            <p>Brand: {product.brand}</p>
+            <p>Price: {product.price.toFixed(2)}</p>
+            <div>
+                <strong>Description</strong>
+                <div dangerouslySetInnerHTML={{ __html: product.description }} />
+            </div>
         </div>
     );
 }

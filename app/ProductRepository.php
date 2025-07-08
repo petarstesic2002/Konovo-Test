@@ -50,13 +50,13 @@ class ProductRepository implements ProductRepositoryInterface
         }
         return $products;
     }
-    public function find(string $token, int $id) : ?object
+    public function find(string $token, int $id) : array
     {
         $products = $this->getAll($token);
-        $product = $products->firstWhere('id', $id);
+        $product = $products->firstWhere('sif_product', $id);
         if(!$product){
             throw new NotFoundHttpException("Product Not Found", null, 404);
         }
-        return (object)$product;
+        return $product;
     }
 }
