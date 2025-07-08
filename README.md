@@ -35,8 +35,8 @@ Make sure these are installed:
 ### 2. Setup the Project
 
 ```bash
-git clone https://github.com/your-username/konovo-test-app.git
-cd konovo-test-app
+git clone https://github.com/petarstesic2002/Konovo-Test.git
+cd Konovo-Test
 composer install
 cp .env.example .env
 php artisan key:generate
