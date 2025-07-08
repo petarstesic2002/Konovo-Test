@@ -6,6 +6,7 @@ import ProductDetails from '../components/productDetails';
 import ProtectedRoute from '../components/protectedRoute';
 import Navbar from "./navbar";
 import HomeRedirect from "./homeRedirect";
+import Footer from "./footer.jsx";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                                 </ProtectedRoute>
                             } />
                         </Routes>
+                        <Footer />
                     </>
                 }/>
             </Routes>
