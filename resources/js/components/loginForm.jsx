@@ -28,10 +28,16 @@ function LoginForm(){
                 <input className="form-control" id="password" name="password" type="password" value={password}
                        onChange={e => setPassword(e.target.value)} placeholder="Lozinka"/>
             </div>
-            <div className="form-group mb-2">
+            <div className="form-group mb-3">
                 <button className="btn btn-primary" type="submit">Prijavi se</button>
-                {error && <span className="alert alert-danger">{error}</span>}
             </div>
+            {error?
+                <div className="form-group mt-4">
+                    <span className="alert alert-danger">{error}</span>
+                </div>
+                :
+                <></>
+            }
         </form>
     )
 }
