@@ -12,7 +12,6 @@ export default function Products() {
 
     return (
         <>
-            <button onClick={handleLogout}>Odjavi se</button>
             <ProductList />
         </>
     );
