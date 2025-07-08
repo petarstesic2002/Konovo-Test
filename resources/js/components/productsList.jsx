@@ -34,6 +34,10 @@ function ProductList() {
         fetchProducts();
     }, [search, category, page]);
 
+    if(products.length == 0){
+        return <h1 className="display-1">Trenutno nema proizvoda...</h1>;
+    }
+
     return (
         <>
             <div className="container mt-2">

@@ -27,7 +27,7 @@ function LoginForm(){
             </div>
             <div className="form-group mb-2">
                 <button className="btn btn-primary" type="submit">Prijavi se</button>
-                {error && <p>{error}</p>}
+                {error && <span className="alert alert-danger">{error}</span>}
             </div>
         </form>
     )
