@@ -20,13 +20,13 @@ function LoginForm(){
     return (
         <form className="container col-6 text-center mt-5" onSubmit={handleSubmit}>
             <div className="form-group mb-2">
-                <input className="form-control" id="username" name="username" type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" required/>
+                <input className="form-control" id="username" name="username" type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Korisnično ime" required/>
             </div>
             <div className="form-group mb-2">
-                <input className="form-control" id="password" name="password" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password" />
+                <input className="form-control" id="password" name="password" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Lozinka" />
             </div>
             <div className="form-group mb-2">
-                <button className="btn btn-primary" type="submit">Log In</button>
+                <button className="btn btn-primary" type="submit">Prijavi se</button>
                 {error && <p>{error}</p>}
             </div>
         </form>

@@ -21,15 +21,15 @@ class AuthController extends BaseController
         );
         if($response->failed())
         {
-            return ApiResponse::sendResponse("Invalid credentials", 401);
+            return ApiResponse::sendResponse("Netačno korisnično ime ili lozinka", 401);
         }
         $token = $response->json()['token'];
         session(["jwt_token" => $token]);
-        return ApiResponse::sendResponse("Login success", 200, ["token" => $token]);
+        return ApiResponse::sendResponse("Prijava uspešna", 200, ["token" => $token]);
     }
     public function logout() : JsonResponse
     {
         session()->forget('jwt_token');
-        return ApiResponse::sendResponse("Logout success", 204);
+        return ApiResponse::sendResponse("Uspešno odjavljivanje", 204);
     }
 }

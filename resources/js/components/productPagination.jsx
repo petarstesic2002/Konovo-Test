@@ -35,11 +35,11 @@ function ProductPagination({page, setPage, lastPage, loading}){
                     onClick={handlePrevious}
                     disabled={page <= 1 || loading}
                 >
-                    &larr; Previous
+                    &larr; Prethodna
                 </button>
 
                 <span>
-                    Page <strong>{page}</strong> of <strong>{lastPage}</strong>
+                    Strana <strong>{page}</strong> od <strong>{lastPage}</strong>
                 </span>
 
                 <button
@@ -47,7 +47,7 @@ function ProductPagination({page, setPage, lastPage, loading}){
                     onClick={handleNext}
                     disabled={page >= lastPage || loading}
                 >
-                    Next &rarr;
+                    Sledeća &rarr;
                 </button>
 
                 {/* Last */}

@@ -31,12 +31,12 @@ export default function Navbar(){
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item me-3">
                             <Link className="dropdown-item" to="/products">
-                                Products
+                                Proizvodi
                             </Link>
                         </li>
                         <li className="nav-item">
                             <button type="button" className="dropdown-item" onClick={handleLogout}>
-                                Logout
+                                Izloguj se
                             </button>
                         </li>
                     </ul>

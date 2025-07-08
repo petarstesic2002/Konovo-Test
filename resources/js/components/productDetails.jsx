@@ -25,15 +25,21 @@ function ProductDetails() {
     if (!product) return <p>Loading...</p>;
 
     return (
-        <div>
-            <img src={product.imgSrc} alt={product.name} />
-            <h2>{product.name}</h2>
-            <p>Category: {product.category}</p>
-            <p>Brand: {product.brand}</p>
-            <p>Price: {product.price.toFixed(2)}</p>
-            <div>
-                <strong>Description</strong>
-                <div dangerouslySetInnerHTML={{ __html: product.description }} />
+        <div className="container d-flex text-center justify-center mt-5">
+            <div className="row">
+                <div className="col-md-5">
+                    <img className="card-img-top" src={product.imgSrc} alt={product.name} />
+                </div>
+                <div className="col-md-7">
+                    <h2>{product.name}</h2>
+                    <p>Kategorija: {product.category}</p>
+                    <p>Brend: {product.brand}</p>
+                    <p>Cena: {product.price.toFixed(2)}</p>
+                    <div>
+                        <strong>Description</strong>
+                        <div dangerouslySetInnerHTML={{ __html: product.description }} />
+                    </div>
+                </div>
             </div>
         </div>
     );

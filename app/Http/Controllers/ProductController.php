@@ -25,9 +25,9 @@ class ProductController extends BaseController
             $response = $this->productRepository->getAll($token, $filters);
             $collection = ProductResource::collection($response['data']);
         }catch(HttpClientException){
-            return ApiResponse::sendResponse("Bad Request", 401);
+            return ApiResponse::sendResponse("Nepravilan Zahtev", 401);
         }
-        return ApiResponse::sendResponse("Success", 200, [
+        return ApiResponse::sendResponse("Uspešno", 200, [
             "data" => $collection,
             "total" => $response['total'],
             "perPage" => $response['per_page'],
@@ -40,9 +40,9 @@ class ProductController extends BaseController
         $product = $this->productRepository->find($token, $id);
         if(!$product)
         {
-            return ApiResponse::sendResponse("Product not found", 404);
+            return ApiResponse::sendResponse("Proizvod nije pronađen", 404);
         }
         $object = new ProductResource($product);
-        return ApiResponse::sendResponse("Success", 200, $object);
+        return ApiResponse::sendResponse("Uspešno", 200, $object);
     }
 }

@@ -24,7 +24,7 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $response = Http::withToken($token)->get($this->apiUrl . "/products");
         if($response->failed()){
-            throw new HttpClientException("Error", 401, null);
+            throw new HttpClientException("Greška", 401, null);
         }
         $products = collect($response->json());
         $products = $products->map(function($product)
@@ -70,7 +70,7 @@ class ProductRepository implements ProductRepositoryInterface
         $products = $this->getAll($token);
         $product = $products['data']->firstWhere('sif_product', $id);
         if(!$product){
-            throw new NotFoundHttpException("ProductController Not Found", null, 404);
+            throw new NotFoundHttpException("Proizvod nije pronađen", null, 404);
         }
         return $product;
     }

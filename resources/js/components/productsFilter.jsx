@@ -6,11 +6,11 @@ function ProductsFilter({setSearch, setCategory}) {
         <>
             <form className="col-md-3">
                 <div className="form-group mb-3">
-                    <input id="name" name="name" className="form-control" type="text" placeholder="Search by name..."
+                    <input id="name" name="name" className="form-control" type="text" placeholder="Pretraži po nazivu..."
                            onChange={e => setSearch(e.target.value)}/>
                 </div>
                 <div className="form-group">
-                    <input id="category" name="category" className="form-control" placeholder="Search by category..."
+                    <input id="category" name="category" className="form-control" placeholder="Pretraži po kategoriji..."
                            onChange={e => setCategory(e.target.value)}/>
                 </div>
             </form>

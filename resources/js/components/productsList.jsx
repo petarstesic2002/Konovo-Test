@@ -38,7 +38,7 @@ function ProductList() {
         <>
             <div className="container mt-2">
                 <h1 className="display-1 text-center">
-                    Products
+                    Proizvodi
                 </h1>
                 <ProductPagination loading={loading} page={page} setPage={setPage} lastPage={totalPages} />
                 <div className="row">
@@ -53,9 +53,9 @@ function ProductList() {
                                     </span>
                                 </Link>
                                 <div className="card-body">
-                                        <span className="card-text text-secondary">
-                                            {Number(p.price).toFixed(2)} RSD
-                                        </span>
+                                    <span className="card-text text-secondary">
+                                        {Number(p.price).toFixed(2)} RSD
+                                    </span>
                                 </div>
                             </div>
                         ))}
