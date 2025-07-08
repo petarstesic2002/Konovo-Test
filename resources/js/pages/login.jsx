@@ -10,8 +10,8 @@ export default function Login() {
        }
     }, [navigate]);
     return (
-        <div>
-            <h2 className="display-2 text-center mt-3">Konovo App - Prijava</h2>
+        <div className="mt-5">
+            <h2 className="display-2 text-center mt-5">Konovo App - Prijava</h2>
             <LoginForm />
         </div>
     );

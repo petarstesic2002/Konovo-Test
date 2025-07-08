@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Support\Facades\Http;
@@ -23,19 +24,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function filter(string $token, array $filters = [])
     {
         $products = $this->getAll($token);
-        $products = $products->map(function($product)
-        {
-            if(isset($product["categoryName"]) && strtolower($product["categoryName"]) === "monitori"){
-                if(isset($product["price"]) && is_numeric($product["price"])){
-                    $product["price"] = round($product["price"] * 1.1, 2);
-                }
-            }
-            if (isset($product['description']) && is_string($product['description'])) {
-                $product['description'] = preg_replace('/\bbrzina\b\s*:\s*(\\r\\n)?<br><br>\\r\\n/i', '<br/>Performanse:<br/>' , $product['description']);
-                $product['description'] = preg_replace('/\bPovezivanje\b\s*:?\s*/i', '<br/>Povezivanje:<br/>', $product['description']);
-            }
-            return $product;
-        });
+        $products = $this->format($products);
         if(!empty($filters["category"])){
             $category = strtolower($filters["category"]);
             $products = $products->filter(function($product) use ($category){
@@ -65,6 +54,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function find(string $token, int $id) : array
     {
         $products = $this->getAll($token);
+        $products = $this->format($products);
         $product = $products->firstWhere('sif_product', $id);
         if(!$product){
             throw new NotFoundHttpException("Proizvod nije pronađen", null, 404);
@@ -77,5 +67,21 @@ class ProductRepository implements ProductRepositoryInterface
             throw new HttpClientException("Greška", 401, null);
         }
         return collect($response->json());
+    }
+    public function format(object $products){
+        return $products->map(function($product)
+        {
+            if(isset($product["categoryName"]) && strtolower($product["categoryName"]) === "monitori"){
+                if(isset($product["price"]) && is_numeric($product["price"])){
+                    $product["price"] = round($product["price"] * 1.1, 2);
+                }
+            }
+            if (isset($product['description']) && is_string($product['description'])) {
+                $product['description'] = trim($product['description'], " -");
+                $product['description'] = preg_replace('/\bbrzina\b\s*:\s*(\\r\\n)?<br><br>\\r\\n/i', '<br/>'.ucfirst('Performanse').':<br/>' , $product['description']);
+                $product['description'] = preg_replace('/\bPovezivanje\b\s*:?\s*/i', '<br/>Povezivanje:<br/>', $product['description']);
+            }
+            return $product;
+        });
     }
 }

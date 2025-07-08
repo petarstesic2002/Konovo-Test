@@ -8,6 +8,8 @@ function ProductDetails() {
     const navigate = useNavigate();
 
     useEffect(()=>{
+        if(!localStorage.getItem('jwt_token'))
+            navigate('/login');
         const fetchProduct = async () => {
             try {
                 const res = await api.get(`/products/${id}`);
@@ -23,7 +25,7 @@ function ProductDetails() {
     if (!product) return <p className="text-center mt-3">Loading...</p>;
 
     return (
-        <div className="container text-center mt-5">
+        <div className="container text-center mt-5" id="product-details">
             <div className="row">
                 <div className="col-md-5">
                     <img className="card-img-top" src={product.imgSrc} alt={product.name} />
