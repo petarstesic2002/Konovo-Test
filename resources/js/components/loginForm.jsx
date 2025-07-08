@@ -18,11 +18,17 @@ function LoginForm(){
         }
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" required/>
-            <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password" />
-            <button type="submit">Log In</button>
-            {error && <p>{error}</p>}
+        <form className="container col-6 text-center mt-5" onSubmit={handleSubmit}>
+            <div className="form-group mb-2">
+                <input className="form-control" id="username" name="username" type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" required/>
+            </div>
+            <div className="form-group mb-2">
+                <input className="form-control" id="password" name="password" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password" />
+            </div>
+            <div className="form-group mb-2">
+                <button className="btn btn-primary" type="submit">Log In</button>
+                {error && <p>{error}</p>}
+            </div>
         </form>
     )
 }

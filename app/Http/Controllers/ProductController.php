@@ -10,7 +10,7 @@ use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class Product extends Base
+class ProductController extends BaseController
 {
     protected ProductRepository $productRepository;
     public function __construct(ProductRepositoryInterface $productRepository)
@@ -21,13 +21,18 @@ class Product extends Base
     {
         $token = $request->input("jwt_token");
         try {
-            $filters = $request->only(["category", "search"]);
-            $products = $this->productRepository->getAll($token, $filters);
-            $collection = ProductResource::collection($products);
+            $filters = $request->only(["category", "search", "page", "per_page"]);
+            $response = $this->productRepository->getAll($token, $filters);
+            $collection = ProductResource::collection($response['data']);
         }catch(HttpClientException){
             return ApiResponse::sendResponse("Bad Request", 401);
         }
-        return ApiResponse::sendResponse("success", 200, $collection);
+        return ApiResponse::sendResponse("Success", 200, [
+            "data" => $collection,
+            "total" => $response['total'],
+            "perPage" => $response['per_page'],
+            "page" => $response['page']
+        ]);
     }
     public function show(Request $request, $id) : JsonResponse
     {
@@ -38,6 +43,6 @@ class Product extends Base
             return ApiResponse::sendResponse("Product not found", 404);
         }
         $object = new ProductResource($product);
-        return ApiResponse::sendResponse("success", 200, $object);
+        return ApiResponse::sendResponse("Success", 200, $object);
     }
 }

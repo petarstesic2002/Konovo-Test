@@ -11,7 +11,7 @@ export default function Login() {
     }, [navigate]);
     return (
         <div>
-            <h2>Log In</h2>
+            <h2 className="display-2 text-center mt-3">Konovo App - Log In</h2>
             <LoginForm />
         </div>
     );

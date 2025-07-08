@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use League\Uri\Http;
 
-class Auth extends Base
+class AuthController extends BaseController
 {
     public function login(\App\Http\Requests\Auth $request) : JsonResponse
     {

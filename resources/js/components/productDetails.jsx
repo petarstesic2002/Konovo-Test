@@ -15,7 +15,8 @@ function ProductDetails() {
                 setProduct(res.data.data);
 
             } catch(error){
-                navigate('/products');
+                //navigate('/products');
+                console.log(error);
             }
         }
         fetchProduct();

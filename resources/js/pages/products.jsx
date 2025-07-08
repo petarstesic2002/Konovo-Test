@@ -1,15 +1,7 @@
 import React from 'react';
-import ProductList from '../components/productsList';
-import { useNavigate } from 'react-router-dom';
+import ProductList from "../components/productsList.jsx";
 
 export default function Products() {
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem('jwt_token');
-        navigate('/login');
-    };
-
     return (
         <>
             <ProductList />
