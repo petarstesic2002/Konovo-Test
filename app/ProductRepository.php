@@ -35,7 +35,8 @@ class ProductRepository implements ProductRepositoryInterface
                 }
             }
             if (isset($product['description']) && is_string($product['description'])) {
-                $product['description'] = preg_replace('/\bbrzina\b/i', 'performanse', $product['description']);
+                $product['description'] = preg_replace('/\bbrzina\b\s*:\s*(\\r\\n)?<br><br>\\r\\n/i', '<br/>Performanse:<br/>' , $product['description']);
+                $product['description'] = preg_replace('/\bPovezivanje\b\s*:?\s*/i', '<br/>Povezivanje:<br/>', $product['description']);
             }
             return $product;
         });

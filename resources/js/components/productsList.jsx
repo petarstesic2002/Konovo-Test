@@ -35,7 +35,7 @@ function ProductList() {
     }, [search, category, page]);
 
     if(products.length == 0){
-        return <h1 className="display-1">Trenutno nema proizvoda...</h1>;
+        return <h1 className="display-4 text-center mt-3">Loading...</h1>;
     }
 
     return (
@@ -56,6 +56,9 @@ function ProductList() {
                                         {p.name}
                                     </span>
                                 </Link>
+                                <div>
+                                    {p.category}
+                                </div>
                                 <div className="card-body">
                                     <span className="card-text text-secondary">
                                         {Number(p.price).toFixed(2)} RSD

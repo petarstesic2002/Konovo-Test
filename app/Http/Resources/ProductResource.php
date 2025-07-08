@@ -23,6 +23,9 @@ class ProductResource extends JsonResource
             'category' => $this['categoryName'],
             'brand' => $this['brandName'],
             'sifProduct' => $this['sif_product'],
+            'vat' => $this['vat'],
+            'ean' => $this['ean'],
+            'stock' => $this['stock']
         ];
     }
 }
