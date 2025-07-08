@@ -4,6 +4,7 @@ namespace App;
 
 interface ProductRepositoryInterface
 {
-    public function getAll(string $token, array $filters = []);
+    public function filter(string $token, array $filters = []);
     public function find(string $token, int $id);
+    public function getAll(string $token);
 }

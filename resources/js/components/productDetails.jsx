@@ -11,12 +11,10 @@ function ProductDetails() {
         const fetchProduct = async () => {
             try {
                 const res = await api.get(`/products/${id}`);
-                console.log(res.data.data);
                 setProduct(res.data.data);
 
             } catch(error){
-                //navigate('/products');
-                console.log(error);
+                navigate('/products');
             }
         }
         fetchProduct();
@@ -62,18 +60,19 @@ function ProductDetails() {
                         :
                         <></>
                     }
+                    <hr/>
+                    {product.description ?
+                        <div className="row text-center">
+                            <h5 className="fw-bold">
+                                Opis
+                            </h5>
+                            <div dangerouslySetInnerHTML={{__html: product.description}} />
+                        </div>
+                        :
+                        <></>
+                    }
                 </div>
             </div>
-            {product.description ?
-                <div className="row text-center">
-                    <h5 className="fw-bold">
-                        Opis
-                    </h5>
-                    <div dangerouslySetInnerHTML={{__html: product.description}} />
-                </div>
-                :
-                <></>
-            }
         </div>
     );
 }

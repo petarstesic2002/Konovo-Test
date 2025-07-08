@@ -22,7 +22,7 @@ class ProductController extends BaseController
         $token = $request->input("jwt_token");
         try {
             $filters = $request->only(["category", "search", "page", "per_page"]);
-            $response = $this->productRepository->getAll($token, $filters);
+            $response = $this->productRepository->filter($token, $filters);
             $collection = ProductResource::collection($response['data']);
         }catch(HttpClientException){
             return ApiResponse::sendResponse("Nepravilan Zahtev", 401);

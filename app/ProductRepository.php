@@ -20,13 +20,9 @@ class ProductRepository implements ProductRepositoryInterface
      * @throws HttpClientException
      * @throws ConnectionException
      */
-    public function getAll(string $token, array $filters = [])
+    public function filter(string $token, array $filters = [])
     {
-        $response = Http::withToken($token)->get($this->apiUrl . "/products");
-        if($response->failed()){
-            throw new HttpClientException("Greška", 401, null);
-        }
-        $products = collect($response->json());
+        $products = $this->getAll($token);
         $products = $products->map(function($product)
         {
             if(isset($product["categoryName"]) && strtolower($product["categoryName"]) === "monitori"){
@@ -69,10 +65,17 @@ class ProductRepository implements ProductRepositoryInterface
     public function find(string $token, int $id) : array
     {
         $products = $this->getAll($token);
-        $product = $products['data']->firstWhere('sif_product', $id);
+        $product = $products->firstWhere('sif_product', $id);
         if(!$product){
             throw new NotFoundHttpException("Proizvod nije pronađen", null, 404);
         }
         return $product;
+    }
+    public function getAll(string $token){
+        $response = Http::withToken($token)->get($this->apiUrl . "/products");
+        if($response->failed()){
+            throw new HttpClientException("Greška", 401, null);
+        }
+        return collect($response->json());
     }
 }
